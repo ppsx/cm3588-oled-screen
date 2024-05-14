@@ -1,0 +1,14 @@
+[Unit]
+Description=OLED Screen support
+Before=network.target
+After=sysinit.target paths.target basic.target
+
+[Service]
+User=root
+EnvironmentFile=/etc/environment
+WorkingDirectory=/opt/oled-screen
+ExecStart=/opt/oled-screen/oled-screen.sh --i2c-port 8
+SyslogIdentifier=oled-screen
+
+[Install]
+WantedBy=multi-user.target
