@@ -43,3 +43,9 @@ That's it.
 When system is booting and oled-screen service is started, it shows nice boot logo animation. Then `System ready` is printed.
 The "User button" is used to switch between different "pages". Each page contains some basic info about: CPU utilization (CPU), memory and swap (MEM), disk (system disk and NVMe) and network (eth0).
 After one minute of inactivity the screen is turned off. User button brings it back to the first page (CPU).
+
+## Preview
+
+https://github.com/ppsx/cm3588-oled-screen/assets/7107135/72bed469-b2ab-4762-8164-e4d473b42bfd
+
+
