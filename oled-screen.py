@@ -32,8 +32,8 @@ def main():
                 # get new data and update screen
                 try:
                     mapping[state](device, data)
-                except:
-                    pass
+                except Exception as e:
+                    print(e)
             time.sleep(0.5)
         manager.next_state()
 

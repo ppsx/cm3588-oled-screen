@@ -81,14 +81,58 @@ def net_stat():
     }
 
 
+def clear_previous():
+    net_prev['in'] = 0
+    net_prev['out'] = 0
+
+
+def temp_cpu():
+    if platform.machine() == 'aarch64':
+        temp = ps.sensors_temperatures()
+        return {
+            'max': temp['bigcore0_thermal'][0].critical,
+            'cpu0': temp['bigcore0_thermal'][0].current,
+            'cpu1': temp['bigcore1_thermal'][0].current,
+            'cpu2': temp['littlecore_thermal'][0].current,
+            'soc': temp['soc_thermal'][0].current,
+        }
+    else:
+        # return some fake data
+        return {
+            'max': 115.0,
+            'cpu0': 34.23,
+            'cpu1': 35.153,
+            'cpu2': 36.23,
+            'soc': 33.83,
+        }
+
+
+def temp_ssd():
+    if platform.machine() == 'aarch64':
+        temp = ps.sensors_temperatures()
+        return {
+            'max': temp['nvme'][0].critical,
+            'nvme0': temp['nvme'][0].current,
+            'nvme1': temp['nvme'][1].current,
+            'nvme2': temp['nvme'][2].current,
+            'nvme3': temp['nvme'][3].current,
+        }
+    else:
+        # return some fake data
+        return {
+            'max': 87.85,
+            'nvme0': 37.85,
+            'nvme1': 36.85,
+            'nvme2': 39.12,
+            'nvme3': 35.01,
+        }
+
+
 mapping = (
     ('cpu', cpu_stat),
     ('mem', mem_stat),
     ('ssd', ssd_stat),
-    ('net', net_stat)
+    ('net', net_stat),
+    ('temp_cpu', temp_cpu),
+    ('temp_ssd', temp_ssd)
 )
-
-
-def clear_previous():
-    net_prev['in'] = 0
-    net_prev['out'] = 0
