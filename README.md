@@ -46,6 +46,6 @@ After one minute of inactivity the screen is turned off. User button brings it b
 
 ## Preview
 
-https://github.com/ppsx/cm3588-oled-screen/assets/7107135/72bed469-b2ab-4762-8164-e4d473b42bfd
 
+https://github.com/ppsx/cm3588-oled-screen/assets/7107135/b9ce4e7e-c01b-41d1-a84b-af80d4e42d62
 
