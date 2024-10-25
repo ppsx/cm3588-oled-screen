@@ -9,9 +9,22 @@ I haven't found a way to enable I2C on any of the official system images (OMV/De
 The issue with Armbian is that it's installed on SD card and I don't know how to install it on eMMC. Again, if you know how to do that, please let me know :)
 
 To enable I2C in Armbian, I had to:
-* make copy of `/boot/dtb-6.1.43-vendor-rk35xx/rockchip/overlay/rk3588-i2c8-m2.dtbo` as `/boot/dtb-6.1.43-vendor-rk35xx/rockchip/overlay/rockchip-rk3588-i2c
-8-m2.dtbo` to make it "visible" by the config
-* add `overlays=i2c8-m2` to `/boot/armbianEnv.txt`
+* create `/boot/overlay-user/` dir if it doesn't exist: `sudo mkdir /boot/overlay-user`
+* create `/boot/dtb` symlink if it doesn't exist: `sudo ln -s dtb-<KERNEL_VERSION>-vendor-rk35xx /boot/dtb`; use proper `<KERNEL_VERSION>` here
+* copy `/boot/dtb-<KERNEL_VERSION>-vendor-rk35xx/rockchip/overlay/rk3588-i2c8-m2.dtbo` to `/boot/overlay-user/` to make it "visible" by the config: `sudo cp /boot/dtb/rockchip/overlay/rk3588-i2c8-m2.dtbo /boot/overlay-user/`
+* add `user_overlays=rk3588-i2c8-m2` to `/boot/armbianEnv.txt`
+
+My `/boot/armbianEnv.txt` looks like this:
+```
+verbosity=1
+bootlogo=false
+overlay_prefix=rockchip-rk3588
+fdtfile=rockchip/rk3588-nanopc-cm3588-nas.dtb
+rootdev=UUID=324c17d1-5084-4be1-a1d6-5952caea5aee
+rootfstype=ext4
+user_overlays=rk3588-i2c8-m2
+usbstoragequirks=0x2537:0x1066:u,0x2537:0x1068:u
+```
 
 Once system is rebooted, the I2C-8 should be accessible.
 
